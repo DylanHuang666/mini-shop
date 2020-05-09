@@ -8,7 +8,8 @@ Page({
    */
   data: {
     swiperList: [],
-    catesList: []
+    catesList: [],
+    floorList: []
   },
 
   /**
@@ -17,6 +18,7 @@ Page({
   onLoad: function(options) {
     this.getSwiperList();
     this.getCateList();
+    this.getFloorList();
   },
 
   getSwiperList() {
@@ -38,6 +40,17 @@ Page({
         catesList: res.data.message
       })
     });
+  },
+  // 获取 楼层数据
+  getFloorList() {
+    request({
+        url: "https://api-hmugo-web.itheima.net/api/public/v1/home/floordata"
+      })
+      .then(res => {
+        this.setData({
+          floorList: res.data.message
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
