@@ -23,7 +23,7 @@ Page({
 
   getSwiperList() {
     request({
-      url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata'
+      url: '/home/swiperdata'
     }).then(res => {
       console.log(res)
       this.setData({
@@ -33,7 +33,7 @@ Page({
   },
   getCateList() {
     request({
-      url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/catitems'
+      url: '/home/catitems'
     }).then(res => {
       // console.log(res)
       this.setData({
@@ -44,7 +44,7 @@ Page({
   // 获取 楼层数据
   getFloorList() {
     request({
-        url: "https://api-hmugo-web.itheima.net/api/public/v1/home/floordata"
+        url: "/home/floordata"
       })
       .then(res => {
         this.setData({
