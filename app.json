@@ -5,7 +5,8 @@
     "pages/cart/cart",
     "pages/user/user",
     "pages/search/search",
-    "pages/goodsList/goodsList"
+    "pages/goodsList/goodsList",
+    "pages/goodDetail/goodDetail"
   ],
   "window":{
     "backgroundTextStyle":"light",
