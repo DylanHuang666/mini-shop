@@ -6,7 +6,11 @@
     "pages/user/user",
     "pages/search/search",
     "pages/goodsList/goodsList",
-    "pages/goodDetail/goodDetail"
+    "pages/goodDetail/goodDetail",
+    "pages/pay/pay",
+    "pages/order/order",
+    "pages/auth/auth",
+    "pages/login/login"
   ],
   "window":{
     "backgroundTextStyle":"light",

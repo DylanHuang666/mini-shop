@@ -175,7 +175,7 @@ Page({
     }
     // 3 跳转到 支付页面
     wx.navigateTo({
-      url: '/pages/pay/index'
+      url: '/pages/pay/pay'
     });
 
   },

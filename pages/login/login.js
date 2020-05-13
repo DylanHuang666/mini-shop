@@ -1,19 +1,27 @@
-// pages/user/user.js
+// pages/login/login.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userinfo: {}
-    // 被收藏的商品的数量
-    // collectNums: 0
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+  },
+
+  handleGetUserInfo(e) {
+    // console.log(e);
+    const { userInfo } = e.detail;
+    wx.setStorageSync("userinfo", userInfo);
+    wx.navigateBack({
+      delta: 1
+    });
 
   },
 
@@ -28,9 +36,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const userinfo = wx.getStorageSync("userinfo");
-    const collect = wx.getStorageSync("collect") || [];
-    this.setData({ userinfo, collectNums: collect.length });
+
   },
 
   /**
