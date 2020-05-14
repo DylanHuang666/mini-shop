@@ -3,7 +3,7 @@ page {
 }
 
 .user_info_wrap {
-  height: 32vh;
+  height: 40vh;
   overflow: hidden;
   background-color: var(--themeColor);
   position: relative;
@@ -14,7 +14,7 @@ page {
 }
 
 .user_info_wrap .user_img_wrap .user_bg {
-  height: 36vh;
+  height: 40vh;
   filter: blur(10rpx);
   transform: scale(1.2);
 }
@@ -61,7 +61,9 @@ page {
   width: 90%;
   left: 50%;
   transform: translateX(-50%);
-  top: -40rpx;
+  top: -124rpx;
+  background: #eee;
+
 }
 
 .user_content .user_main .history_wrap {

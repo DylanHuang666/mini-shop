@@ -18,7 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+    console.log(999)
   },
 
   /**
@@ -46,9 +46,9 @@ Page({
     const res = await request({ url: "/goods/detail", data: { goods_id } });
     this.GoodsInfo = res.data.message;
     // 1 获取缓存中的商品收藏的数组
-    // let collect = wx.getStorageSync("collect") || [];
+    let collect = wx.getStorageSync("collect") || [];
     // 2 判断当前商品是否被收藏
-    // let isCollect = collect.some(v => v.goods_id === this.GoodsInfo.goods_id);
+    let isCollect = collect.some(v => v.goods_id === this.GoodsInfo.goods_id);
     this.setData({
       goodsObj: {
         goods_name: res.data.message.goods_name,
@@ -58,9 +58,16 @@ Page({
         // 临时自己改 确保后台存在 1.webp => 1.jpg 
         goods_introduce: res.data.message.goods_introduce.replace(/\.webp/g, '.jpg'),
         pics: res.data.message.pics
-      }
-      // isCollect
+      },
+      isCollect
     })
+
+    let history = wx.getStorageSync('history') || []
+    let isLook = history.some((v) => { return v.goods_id == this.GoodsInfo.goods_id})
+    if(!isLook){
+      history.push(this.GoodsInfo)
+      wx.setStorageSync('history', history)
+    }
   },
 
   // 点击轮播图 放大预览
@@ -100,6 +107,42 @@ Page({
       // true 防止用户 手抖 疯狂点击按钮 
       mask: true
     });
+  },
+
+  // 点击 商品收藏图标
+  handleCollect() {
+    let isCollect = false;
+    // 1 获取缓存中的商品收藏数组
+    let collect = wx.getStorageSync("collect") || [];
+    // 2 判断该商品是否被收藏过
+    let index = collect.findIndex(v => v.goods_id === this.GoodsInfo.goods_id);
+    // 3 当index！=-1表示 已经收藏过 
+    if (index !== -1) {
+      // 能找到 已经收藏过了  在数组中删除该商品
+      collect.splice(index, 1);
+      isCollect = false;
+      wx.showToast({
+        title: '取消成功',
+        icon: 'success',
+        mask: true
+      });
+
+    } else {
+      // 没有收藏过
+      collect.push(this.GoodsInfo);
+      isCollect = true;
+      wx.showToast({
+        title: '收藏成功',
+        icon: 'success',
+        mask: true
+      });
+    }
+    // 4 把数组存入到缓存中
+    wx.setStorageSync("collect", collect);
+    // 5 修改data中的属性  isCollect
+    this.setData({
+      isCollect
+    })
   },
 
   /**

@@ -31,7 +31,7 @@
             </checkbox-group>
           </view>
           <!-- 商品图片 -->
-          <navigator class="cart_img_wrap">
+          <navigator class="cart_img_wrap" url="/pages/goodDetail/goodDetail?goods_id={{item.goods_id}}">
           <image mode="widthFix" src="{{item.goods_small_logo}}" ></image>
           </navigator>
           <!-- 商品信息 -->

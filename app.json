@@ -10,7 +10,8 @@
     "pages/pay/pay",
     "pages/order/order",
     "pages/auth/auth",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/collect/collect"
   ],
   "window":{
     "backgroundTextStyle":"light",
