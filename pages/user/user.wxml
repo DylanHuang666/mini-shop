@@ -65,7 +65,9 @@
         <text>联系客服</text>
         <text>400-618-4000</text>
       </view>
-      <navigator url="/pages/feedback/index" class="app_info_item">意见反馈</navigator>
+      <view class="app_info_item" style="position:relative">意见反馈
+        <button hover-stop-propagation="true" open-type="feedback" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;background-color:transparent;padding:0;width:100%;"></button>
+      </view>
       <view class="app_info_item">关于我们</view>
     </view>
     <!-- 推荐 -->

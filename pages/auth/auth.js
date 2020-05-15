@@ -43,6 +43,7 @@ Page({
       const loginParams = { encryptedData, rawData, iv, signature, code };
       //  3 发送请求 获取用户的token
       let res = await request({ url: "/users/wxlogin", data: loginParams, method: "post" });
+      console.log(res)
       const { token } = res.data.message
       console.log(token);
       // 4 把token存入缓存中 同时跳转回上一个页面
@@ -54,7 +55,7 @@ Page({
     } catch (error) {
       console.log(error);
       wx.showToast({
-        title: '获取token失败',
+        title: '获取token失败，无法支付！',
         mask: true,
         icon: 'none',
         duration: 2000
