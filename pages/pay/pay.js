@@ -41,7 +41,27 @@ Page({
    */
   onShow: function() {
     // 1 获取缓存中的收货地址信息
-    const address = wx.getStorageSync("address");
+    const address = wx.getStorageSync("address") || {};
+    //如果是商品详情页立即购买跳过来的
+    console.log(this.options.frompage)
+    if(this.options.frompage == 'detail'){
+      let buynoworder = wx.getStorageSync("buynoworder") || [];
+      // 1 总价格 总数量
+      let totalPrice = 0;
+      let totalNum = 0;
+      buynoworder.forEach(v => {
+        totalPrice += v.num * v.goods_price;
+        totalNum += v.num;
+      })
+      this.setData({
+        cart: buynoworder,
+        totalPrice,
+        totalNum,
+        address
+      });
+      return
+    }
+    
     // 1 获取缓存中的购物车数据
     let cart = wx.getStorageSync("cart") || [];
     // 过滤后的购物车数组
@@ -67,6 +87,14 @@ Page({
 
   // 点击 支付 
   async handleOrderPay() {
+    if (!this.data.address.userName){
+      wx.showToast({
+        title: '请先填写您的收货地址后，再结算',
+        duration:3000,
+        icon:'none'
+      })
+      return
+    }
     try {
       // 1 判断缓存中有没有token 
       const token = wx.getStorageSync("token");
@@ -142,6 +170,30 @@ Page({
       await showToast({
         title: "支付失败"
       })
+      console.log(error);
+    }
+  },
+
+  // 点击 修改收货地址
+  async handleChooseAddress() {
+    try {
+      // 1 获取 权限状态
+      const res1 = await getSetting();
+      const scopeAddress = res1.authSetting["scope.address"];
+      // 2 判断 权限状态
+      if (scopeAddress === false) {
+        await openSetting();
+      }
+      // 4 调用获取收货地址的 api
+      let address = await chooseAddress();
+      address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
+      this.setData({
+        address
+      })
+      // 5 存入到缓存中
+      wx.setStorageSync("address", address);
+
+    } catch (error) {
       console.log(error);
     }
   },

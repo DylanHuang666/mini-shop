@@ -102,6 +102,20 @@
 					"id": -1,
 					"name": "搜索页",
 					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "视频列表页",
+					"pathName": "pages/video/video",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "视频播放页",
+					"pathName": "pages/videoDetail/videoDetail",
 					"scene": null
 				}
 			]

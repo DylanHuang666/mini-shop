@@ -14,11 +14,12 @@ Page({
   },
   // 商品对象
   GoodsInfo: {},
+  buynoworderinfo:{},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(999)
+    
   },
 
   /**
@@ -35,6 +36,8 @@ Page({
     let pages = getCurrentPages();
     let currentPage = pages[pages.length - 1];
     let options = currentPage.options;
+    console.log(currentPage)
+    console.log(this)
     const {
       goods_id
     } = options;
@@ -45,6 +48,7 @@ Page({
   async getGoodsDetail(goods_id) {
     const res = await request({ url: "/goods/detail", data: { goods_id } });
     this.GoodsInfo = res.data.message;
+    this.buynoworderinfo = res.data.message
     // 1 获取缓存中的商品收藏的数组
     let collect = wx.getStorageSync("collect") || [];
     // 2 判断当前商品是否被收藏
@@ -62,9 +66,11 @@ Page({
       isCollect
     })
 
-    let history = wx.getStorageSync('history') || []
-    let isLook = history.some((v) => { return v.goods_id == this.GoodsInfo.goods_id})
-    if(!isLook){
+    //添加到缓存历史记录
+    let history = wx.getStorageSync('history') || [];
+    const userinfo = wx.getStorageSync("userinfo");
+    let isLook = history.some((v) => { return v.goods_id == this.GoodsInfo.goods_id});
+    if(!isLook && userinfo){
       history.push(this.GoodsInfo)
       wx.setStorageSync('history', history)
     }
@@ -85,6 +91,18 @@ Page({
 
   // 点击 加入购物车
   handleCartAdd() {
+    const userinfo = wx.getStorageSync("userinfo");
+    if(!userinfo){
+      wx.showToast({
+        title:'请先登录再添加',
+        icon: 'none',
+        duration: 2000,
+        success:function(res){
+          console.log(res)
+        }
+      })
+      return
+    }
     // 1 获取缓存中的购物车 数组
     let cart = wx.getStorageSync("cart") || [];
     // 2 判断 商品对象是否存在于购物车数组中
@@ -111,6 +129,18 @@ Page({
 
   // 点击 商品收藏图标
   handleCollect() {
+    const userinfo = wx.getStorageSync("userinfo");
+    if (!userinfo) {
+      wx.showToast({
+        title: '请先登录再收藏',
+        icon: 'none',
+        duration: 2000,
+        success: function (res) {
+          console.log(res)
+        }
+      })
+      return
+    }
     let isCollect = false;
     // 1 获取缓存中的商品收藏数组
     let collect = wx.getStorageSync("collect") || [];
@@ -142,6 +172,28 @@ Page({
     // 5 修改data中的属性  isCollect
     this.setData({
       isCollect
+    })
+  },
+
+  // 立即购买
+  handleBuy(){
+    const userinfo = wx.getStorageSync("userinfo");
+    if (!userinfo) {
+      wx.showToast({
+        title: '请先登录再购买',
+        icon: 'none',
+        duration: 2000,
+        success: function (res) {
+          console.log(res)
+        }
+      })
+      return
+    }
+    wx.removeStorageSync("buynoworder");
+    this.buynoworderinfo.num = 1;
+    wx.setStorageSync("buynoworder", [this.buynoworderinfo]);
+    wx.navigateTo({
+      url: "/pages/pay/pay?frompage=detail"
     })
   },
 

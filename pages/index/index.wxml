@@ -19,9 +19,9 @@
      -->
   <swiper autoplay indicator-dots circular indicator-active-color="#eb4450">
     <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-      <navigator url="{{item.navigator_url}}">
+      <!-- <navigator> -->
         <image mode="widthFix" src="{{item.image_src}}"></image>
-      </navigator>
+      <!-- </navigator> -->
     </swiper-item>
   </swiper>
 </view>

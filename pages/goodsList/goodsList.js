@@ -24,7 +24,8 @@ Page({
         isActive: false
       }
     ],
-    goodsList: []
+    goodsList: [],
+    index:0
   },
 
   // 接口要的参数
@@ -36,6 +37,8 @@ Page({
   },
   // 总页数
   totalPages: 1,
+  //综合数据
+  initGoodsList:[],
 
   /**
    * 生命周期函数--监听页面加载
@@ -62,6 +65,28 @@ Page({
       // 拼接了数组
       goodsList: [...this.data.goodsList, ...res.data.message.goods]
     })
+    if (this.QueryParams.pagenum == 1){
+      this.initGoodsList = res.data.message.goods
+    }
+
+    //点的是销量，按销量排一次
+    if (this.data.index == 1) {
+      this.data.goodsList.sort(function (a, b) {
+        return b.goods_id - a.goods_id
+      })
+      this.setData({
+        goodsList: this.data.goodsList
+      })
+    }
+    //点的是价格，再价格小到大排一次
+    if (this.data.index == 2) {
+      this.data.goodsList.sort(function (a, b) {
+        return a.goods_price - b.goods_price
+      })
+      this.setData({
+        goodsList: this.data.goodsList
+      })
+    } 
 
     // 关闭下拉刷新的窗口 如果没有调用下拉刷新的窗口 直接关闭也不会报错  
     wx.stopPullDownRefresh();
@@ -74,6 +99,8 @@ Page({
     const {
       index
     } = e.detail;
+    console.log(index)
+    this.data.index = index
     // 2 修改源数组
     let {
       tabs
@@ -83,6 +110,30 @@ Page({
     this.setData({
       tabs
     })
+
+    //点击不同tab更换数据
+    if (index == 0) {
+      this.setData({
+        goodsList: this.initGoodsList
+      })
+      this.QueryParams.pagenum = 1
+    }
+    if (index == 1) {
+      this.data.goodsList.sort(function (a, b) {
+        return b.goods_id - a.goods_id
+      })
+      this.setData({
+        goodsList: this.data.goodsList
+      })
+    }
+    if(index == 2){
+      this.data.goodsList.sort(function (a, b) {
+        return a.goods_price - b.goods_price
+      })
+      this.setData({
+        goodsList: this.data.goodsList
+      })
+    } 
   },
 
   /**
@@ -145,7 +196,7 @@ Page({
       // 还有下一页数据
       //  console.log('%c'+"有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)");
       this.QueryParams.pagenum++;
-      this.getGoodsList();
+      this.getGoodsList(); 
     }
   },
 

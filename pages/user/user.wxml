@@ -38,7 +38,7 @@
       <view class="orders_title">我的订单</view>
       <view class="order_content">
         <navigator url="/pages/order/order?type=1">
-          <view class="iconfont icon-ding_dan"></view>
+          <view class="iconfont icon-yixianshi-"></view>
           <view class="order_name">全部订单</view>
         </navigator>
         <navigator url="/pages/order/order?type=2">
@@ -59,6 +59,9 @@
     <view class="address_wrap">
       收货地址管理
     </view>
+    <view class="address_wrap" bindtap="gotovideo">
+      视频娱乐
+    </view>
     <!-- 应用信息相关 -->
     <view class="app_info_wrap">
       <view class="app_info_item app_info_contact">
@@ -71,8 +74,9 @@
       <view class="app_info_item">关于我们</view>
     </view>
     <!-- 推荐 -->
-    <view class="recommend_wrap">
-      把应用推荐给其他人
+    <view class="recommend_wrap" style="display:flex;" bindtap="gotomap">
+      查看自己的位置
+      <view style="text-align:right;flex:1; color:var(--themeColor);" class="userLocation">{{userLocation}}</view>
     </view>
   </view>
 </view>

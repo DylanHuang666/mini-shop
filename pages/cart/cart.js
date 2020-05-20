@@ -12,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    address: {},
+    // address: {},
     cart: [],
     allChecked: false,
     totalPrice: 0,
@@ -23,7 +23,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    const userinfo = wx.getStorageSync("userinfo");
+    if (!userinfo.nickName){
+      wx.showToast({
+        title: '登录后才可以往购物车添加商品哦！',
+        icon:'none',
+        duration:3000
+      })
+    }
   },
 
   /**
@@ -38,37 +45,37 @@ Page({
    */
   onShow: function() {
     // 1 获取缓存中的收货地址信息
-    const address = wx.getStorageSync("address");
+    // const address = wx.getStorageSync("address");
     // 1 获取缓存中的购物车数据
     const cart = wx.getStorageSync("cart") || [];
 
-    this.setData({
-      address
-    });
+    // this.setData({
+    //   address
+    // });
     this.setCart(cart);
   },
 
   // 点击 收货地址
-  async handleChooseAddress() {
-    try {
-      // 1 获取 权限状态
-      const res1 = await getSetting();
-      const scopeAddress = res1.authSetting["scope.address"];
-      // 2 判断 权限状态
-      if (scopeAddress === false) {
-        await openSetting();
-      }
-      // 4 调用获取收货地址的 api
-      let address = await chooseAddress();
-      address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
+  // async handleChooseAddress() {
+  //   try {
+  //     // 1 获取 权限状态
+  //     const res1 = await getSetting();
+  //     const scopeAddress = res1.authSetting["scope.address"];
+  //     // 2 判断 权限状态
+  //     if (scopeAddress === false) {
+  //       await openSetting();
+  //     }
+  //     // 4 调用获取收货地址的 api
+  //     let address = await chooseAddress();
+  //     address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
 
-      // 5 存入到缓存中
-      wx.setStorageSync("address", address);
+  //     // 5 存入到缓存中
+  //     wx.setStorageSync("address", address);
 
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
   // 商品的选中
   handeItemChange(e) {
     // 1 获取被修改的商品的id
@@ -155,17 +162,26 @@ Page({
   },
   // 点击 结算 
   async handlePay() {
+    const userinfo = wx.getStorageSync("userinfo");
+    if (!userinfo.nickName) {
+      wx.showToast({
+        title: '请先登录后再操作哦！',
+        icon: 'none',
+        duration: 3000
+      })
+      return
+    }
     // 1 判断收货地址
     const {
-      address,
+      // address,
       totalNum
     } = this.data;
-    if (!address.userName) {
-      await showToast({
-        title: "您还没有选择收货地址"
-      });
-      return;
-    }
+    // if (!address.userName) {
+    //   await showToast({
+    //     title: "您还没有选择收货地址"
+    //   });
+    //   return;
+    // }
     // 2 判断用户有没有选购商品
     if (totalNum === 0) {
       await showToast({

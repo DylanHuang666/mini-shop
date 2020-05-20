@@ -1,4 +1,4 @@
-// pages/user/user.js
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 Page({
 
   /**
@@ -8,16 +8,65 @@ Page({
     userinfo: {},
     // 被收藏的商品的数量
     collectNums: 0,
-    historyNums: 0
+    historyNums: 0,
+    userLocation:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    // 实例化API核心类
+    var qqmapsdk = new QQMapWX({
+      key: '7CJBZ-5XRYX-JOB46-ZEDWL-SRM5E-KFBFT' // 必填
+    });
+    
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      // isHighAccuracy: true,
+      // highAccuracyExpireTime: 4000,
+      success: (res)=> {
+        console.log(res)
+        const latitude = res.latitude
+        const longitude = res.longitude
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: latitude,
+            longitude: longitude
+          },
+          success: (res) => {
+            console.log(res)
+            this.setData({
+              userLocation: res.result.ad_info.city + res.result.ad_info.district
+            })
+          }
+        })
+      }
+    })
   },
 
+  gotomap() {
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      isHighAccuracy: true,
+      highAccuracyExpireTime: 4000,
+      success(res) {
+        console.log(res)
+        const latitude = res.latitude
+        const longitude = res.longitude
+        wx.openLocation({
+          latitude,
+          longitude,
+          scale: 18
+        })
+      }
+    })
+  },
+  gotovideo(){
+    wx.navigateTo({
+      url: '/pages/video/video',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -29,7 +78,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    const userinfo = wx.getStorageSync("userinfo");
+    const userinfo = wx.getStorageSync("userinfo") || {};
     const collect = wx.getStorageSync("collect") || [];
     const history = wx.getStorageSync("history") || [];
     this.setData({
