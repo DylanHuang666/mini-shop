@@ -19,7 +19,8 @@ Page({
     address: {},
     cart: [],
     totalPrice: 0,
-    totalNum: 0
+    totalNum: 0,
+    fromPage:''
   },
 
   /**
@@ -57,13 +58,15 @@ Page({
         cart: buynoworder,
         totalPrice,
         totalNum,
-        address
+        address,
+        fromPage: 'detail'
       });
       return
     }
     
     // 1 获取缓存中的购物车数据
     let cart = wx.getStorageSync("cart") || [];
+    
     // 过滤后的购物车数组
     cart = cart.filter(v => v.checked);
     this.setData({
@@ -95,83 +98,116 @@ Page({
       })
       return
     }
-    try {
-      // 1 判断缓存中有没有token 
-      const token = wx.getStorageSync("token");
-      // 2 判断
-      if (!token) {
-        wx.navigateTo({
-          url: '/pages/auth/auth'
-        });
-        return;
-      }
-      // 3 创建订单
-      // 3.1 准备 请求头参数
-      // const header = { Authorization: token };
-      // 3.2 准备 请求体参数
-      const order_price = this.data.totalPrice;
-      const consignee_addr = this.data.address.all;
-      const cart = this.data.cart;
-      let goods = [];
-      cart.forEach(v => goods.push({
-        goods_id: v.goods_id,
-        goods_number: v.num,
-        goods_price: v.goods_price
-      }))
-      const orderParams = {
-        order_price,
-        consignee_addr,
-        goods
-      };
-      // 4 准备发送请求 创建订单 获取订单编号
-      let res1 = await request({
-        url: "/my/orders/create",
-        method: "POST",
-        data: orderParams
-      });
-      const {
-        order_number
-      } = res1.data.message
-      // 5 发起 预支付接口
-      let res2 = await request({
-        url: "/my/orders/req_unifiedorder",
-        method: "POST",
-        data: {
-          order_number
-        }
-      });
-      const {
-        pay
-      } = res2.data.message
-      // 6 发起微信支付 
-      await requestPayment(pay);
-      // 7 查询后台 订单状态
-      const res = await request({
-        url: "/my/orders/chkOrder",
-        method: "POST",
-        data: {
-          order_number
-        }
-      });
-      await showToast({
-        title: "支付成功"
-      });
-      // 8 手动删除缓存中 已经支付了的商品
+
+    //模拟支付成功弹窗
+    wx.showToast({
+      title: '模拟支付成功',
+      icon:'success',
+      duration:3000
+    })
+    //把这个订单信息push到缓存中的成功订单数组中
+    let successOrder = wx.getStorageSync("successOrder") || [];
+    let orderDetail = {
+      detail:this.data.cart
+    }
+    orderDetail.totalPrice = this.data.totalPrice
+    orderDetail.totalNum = this.data.totalNum
+    orderDetail.address = this.data.address
+    orderDetail.payType = 0 //0 => 已支付，1未支付
+    orderDetail.createTime = Date.now()
+    orderDetail.orderNum = parseInt(Math.random() * 10000000000000)
+    successOrder.push(orderDetail)
+    wx.setStorageSync("successOrder", successOrder)
+    setTimeout(function(){
+      wx.redirectTo({
+        url: `/pages/orderDetail/orderDetail?orderNum=${orderDetail.orderNum}`,
+      })
+    },2000)
+    //手动删除缓存中 已经支付了的商品(是从购物车跳过来的才删)
+    if(!this.data.fromPage){
       let newCart = wx.getStorageSync("cart");
       newCart = newCart.filter(v => !v.checked);
       wx.setStorageSync("cart", newCart);
-
-      // 8 支付成功了 跳转到订单页面
-      wx.navigateTo({
-        url: '/pages/order/order'
-      });
-
-    } catch (error) {
-      await showToast({
-        title: "支付失败"
-      })
-      console.log(error);
     }
+
+
+    // try {
+    //   // 1 判断缓存中有没有token 
+    //   const token = wx.getStorageSync("token");
+    //   // 2 判断
+    //   if (!token) {
+    //     wx.navigateTo({
+    //       url: '/pages/auth/auth'
+    //     });
+    //     return;
+    //   }
+    //   // 3 创建订单
+    //   // 3.1 准备 请求头参数
+    //   // const header = { Authorization: token };
+    //   // 3.2 准备 请求体参数
+    //   const order_price = this.data.totalPrice;
+    //   const consignee_addr = this.data.address.all;
+    //   const cart = this.data.cart;
+    //   let goods = [];
+    //   cart.forEach(v => goods.push({
+    //     goods_id: v.goods_id,
+    //     goods_number: v.num,
+    //     goods_price: v.goods_price
+    //   }))
+    //   const orderParams = {
+    //     order_price,
+    //     consignee_addr,
+    //     goods
+    //   };
+    //   // 4 准备发送请求 创建订单 获取订单编号
+    //   let res1 = await request({
+    //     url: "/my/orders/create",
+    //     method: "POST",
+    //     data: orderParams
+    //   });
+    //   const {
+    //     order_number
+    //   } = res1.data.message
+    //   // 5 发起 预支付接口
+    //   let res2 = await request({
+    //     url: "/my/orders/req_unifiedorder",
+    //     method: "POST",
+    //     data: {
+    //       order_number
+    //     }
+    //   });
+    //   const {
+    //     pay
+    //   } = res2.data.message
+    //   // 6 发起微信支付 
+    //   await requestPayment(pay);
+    //   // 7 查询后台 订单状态
+    //   const res = await request({
+    //     url: "/my/orders/chkOrder",
+    //     method: "POST",
+    //     data: {
+    //       order_number
+    //     }
+    //   });
+    //   await showToast({
+    //     title: "支付成功"
+    //   });
+    //   // 8 手动删除缓存中 已经支付了的商品
+    //   let newCart = wx.getStorageSync("cart");
+    //   newCart = newCart.filter(v => !v.checked);
+    //   wx.setStorageSync("cart", newCart);
+
+    //   // 8 支付成功了 跳转到订单页面
+    //   wx.navigateTo({
+    //     url: '/pages/order/order'
+    //   });
+
+    // } catch (error) {
+    //   await showToast({
+    //     title: "支付失败"
+    //   })
+    //   console.log(error);
+    // }
   },
 
   // 点击 修改收货地址

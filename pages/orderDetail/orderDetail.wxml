@@ -1,0 +1,43 @@
+<view class="address-wrap">
+  <view class="address-box">
+    <view class="address-title">收件人信息</view>
+    <view class="address-main">
+      <view class="name">
+        <text>收件人：</text>
+        <text>{{orderinfo[0].address.userName}}</text>
+      </view>
+      <view class="address">
+        <text>地址：</text>
+        <text>{{orderinfo[0].address.all}}</text>
+      </view>
+      <view class="phone">
+        <text>手机号码：</text>
+        <text>{{orderinfo[0].address.telNumber}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="goods-wrap">
+  <view class="good-item" wx:for="{{orderinfo[0].detail}}" wx:key="goods_id">
+    <view class="img-wrap">
+      <image mode="widthFix" src="{{item.goods_small_logo}}"></image>
+    </view>
+    <view class="good-info-box">
+      <view class="good-name">{{item.goods_name}}</view>
+      <view class="up-box">
+        <view class="price">￥{{item.goods_price}}</view>
+        <view class="num">X {{item.num}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="totalnum">总量：<text>{{orderinfo[0].totalNum}}</text></view>
+  <view class="totalprice">总价：<text>￥{{orderinfo[0].totalPrice}}</text></view>
+</view>
+
+<view class="order-info-wrap">
+  <view>订单状态：<text class="text">已付款</text></view>
+  <view>订单编号：{{orderinfo[0].orderNum}}</view>
+  <view>订单创建日期：{{orderinfo[0].createTime}}</view>
+</view>

@@ -38,27 +38,27 @@
       <view class="orders_title">我的订单</view>
       <view class="order_content">
         <navigator url="/pages/order/order?type=1">
-          <view class="iconfont icon-yixianshi-"></view>
+          <view class="iconfont2 icon-quanbudingdan"></view>
           <view class="order_name">全部订单</view>
         </navigator>
         <navigator url="/pages/order/order?type=2">
-          <view class="iconfont icon-fukuantongzhi"></view>
-          <view class="order_name">待付款</view>
+          <view class="iconfont2 icon-yifukuan"></view>
+          <view class="order_name">已付款</view>
         </navigator>
         <navigator url="/pages/order/order?type=3">
-          <view class="iconfont icon-receipt-address"></view>
+          <view class="iconfont2 icon-daishouhuo"></view>
           <view class="order_name">待收货</view>
         </navigator>
-        <navigator>
-          <view class="iconfont icon-tuihuotuikuan_dianpu"></view>
+        <navigator url="/pages/order/order?type=4">
+          <view class="iconfont2 icon-tuikuan"></view>
           <view class="order_name">退款/退货</view>
         </navigator>
       </view>
     </view>
     <!-- 收货地址管理 -->
-    <view class="address_wrap">
+    <!-- <view class="address_wrap">
       收货地址管理
-    </view>
+    </view> -->
     <view class="address_wrap" bindtap="gotovideo">
       视频娱乐
     </view>
@@ -71,7 +71,7 @@
       <view class="app_info_item" style="position:relative">意见反馈
         <button hover-stop-propagation="true" open-type="feedback" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;background-color:transparent;padding:0;width:100%;"></button>
       </view>
-      <view class="app_info_item">关于我们</view>
+      <!-- <view class="app_info_item">关于我们</view> -->
     </view>
     <!-- 推荐 -->
     <view class="recommend_wrap" style="display:flex;" bindtap="gotomap">

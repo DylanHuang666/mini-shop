@@ -19,9 +19,9 @@
      -->
   <swiper autoplay indicator-dots circular indicator-active-color="#eb4450">
     <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-      <!-- <navigator> -->
+      <navigator url="/pages/goodsList/goodsList?query={{index == 0?'夏装':index == 1?'小米电视':'好货'}}">
         <image mode="widthFix" src="{{item.image_src}}"></image>
-      <!-- </navigator> -->
+      </navigator>
     </swiper-item>
   </swiper>
 </view>
@@ -37,14 +37,14 @@
 
 <!-- 楼层 开始 -->
 <view class="index_floor">
-  <view class="floor_group" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="*this">
+  <view class="floor_group" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1">
     <!-- 标题 -->
     <view class="floor_title">
       <image mode="widthFix" src="{{item1.floor_title.image_src}}"></image>
     </view>
     <!-- 内容 -->
     <view class="floor_list">
-      <navigator wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name" url="{{item2.navigator_url}}">
+      <navigator wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name" url="/pages/goodsList/goodsList?query={{toGoodsListUrlQuery[index1][index2]}}">
         <image mode="{{index2===0?'widthFix':'scaleToFill'}}" src="{{item2.image_src}}"></image>
       </navigator>
     </view>

@@ -9,7 +9,12 @@ Page({
   data: {
     swiperList: [],
     catesList: [],
-    floorList: []
+    floorList: [],
+    toGoodsListUrlQuery:[
+      ['服饰', '热', '爆款', '春季', '心动',],
+      ['户外', '登山包', '手套', '运动鞋', '冲锋衣',],
+      ['饰品', '胸针', '手链', '水晶项链', '情侣表',]
+    ]
   },
 
   /**

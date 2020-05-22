@@ -13,7 +13,8 @@
     "pages/login/login",
     "pages/collect/collect",
     "pages/video/video",
-    "pages/videoDetail/videoDetail"
+    "pages/videoDetail/videoDetail",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -116,6 +116,14 @@
 					"id": -1,
 					"name": "视频播放页",
 					"pathName": "pages/videoDetail/videoDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "订单详情页",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "orderNum=3674015989851",
 					"scene": null
 				}
 			]

@@ -3,11 +3,11 @@
   <view class="collect_main">
     <view class="collect_item" hidden="{{!tabs[0].isActive}}"></view>
     <view class="collect_item" hidden="{{!tabs[1].isActive}}">
-      <view class="collect_title">
+      <!-- <view class="collect_title">
         <text class="collect_tips active">全部</text>
         <text class="collect_tips">正在热卖</text>
         <text class="collect_tips">即将上线</text>
-      </view>
+      </view> -->
       <view class="collect_content">
         <navigator class="goods_item" wx:for="{{collect}}" wx:key="goods_id" url="/pages/goodDetail/goodDetail?goods_id={{item.goods_id}}">
           <!-- 左侧 图片容器 -->

@@ -49,7 +49,7 @@
         </view>
     </block>
     <block wx:else>
-      <image mode="widthFix" src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1445955619,490944463&fm=26&gp=0.jpg" ></image>
+      <image class="img" mode="widthFix" src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1445955619,490944463&fm=26&gp=0.jpg" ></image>
     </block>
   </view>
 </view>

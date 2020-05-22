@@ -1,5 +1,6 @@
 page {
   padding-bottom: 90rpx;
+  background: #f6f6f6;
 }
 
 .revice_address_row .address_btn {
@@ -141,4 +142,7 @@ page {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.img{
+  margin-top: 148rpx;
 }

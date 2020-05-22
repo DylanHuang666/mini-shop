@@ -101,7 +101,7 @@ page {
   text-align: center;
 }
 
-.user_content .user_main .orders_wrap .order_content navigator .iconfont {
+.user_content .user_main .orders_wrap .order_content navigator .iconfont2 {
   color: var(--themeColor);
   font-size: 40rpx;
 }
