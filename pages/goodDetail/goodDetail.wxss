@@ -45,7 +45,7 @@ page {
   border-left: 1rpx solid #000;
 }
 
-.goods_name_row .goods_collect .icon-shoucang1 {
+.goods_name_row .goods_collect .icon-shoucang {
   color: orangered;
 }
 
@@ -108,4 +108,7 @@ page {
   color: #fff;
   font-size: 30rpx;
   font-weight: 600;
+}
+.iconfont2{
+  font-size: 40rpx;
 }

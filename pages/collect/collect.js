@@ -66,6 +66,12 @@ Page({
         isCome:true
       });
     }
+    const collect1 = wx.getStorageSync("collect") || [];
+    if (this.data.collect.length != collect1.length){
+      this.setData({
+        collect: collect1
+      })
+    }
   },
 
   // 根据标题索引来激活选中 标题数组

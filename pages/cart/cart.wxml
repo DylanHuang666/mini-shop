@@ -32,7 +32,7 @@
           </view>
           <!-- 商品图片 -->
           <navigator class="cart_img_wrap" url="/pages/goodDetail/goodDetail?goods_id={{item.goods_id}}">
-          <image mode="widthFix" src="{{item.goods_small_logo}}" ></image>
+          <image mode="widthFix" src="{{item.goods_small_logo?item.goods_small_logo:'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}" ></image>
           </navigator>
           <!-- 商品信息 -->
           <view class="cart_info_wrap">

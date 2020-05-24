@@ -1,4 +1,4 @@
-// pages/orderDetail/orderDetail.js
+let { formatTime } = require('../../utils/util.js');
 Page({
 
   /**
@@ -31,7 +31,7 @@ Page({
     let orderinfo = successOrder.filter((v,i)=>{
       return v.orderNum == this.options.orderNum
     })
-    orderinfo[0].createTime = new Date(orderinfo[0].createTime).toLocaleString()
+    orderinfo[0].createTime = formatTime(new Date(orderinfo[0].createTime))
     this.setData({
       orderinfo
     })

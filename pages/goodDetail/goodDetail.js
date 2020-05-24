@@ -19,7 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('onLoad')
+    
   },
 
   /**
@@ -36,8 +36,6 @@ Page({
     let pages = getCurrentPages();
     let currentPage = pages[pages.length - 1];
     let options = currentPage.options;
-    console.log(currentPage)
-    console.log(this)
     const {
       goods_id
     } = options;

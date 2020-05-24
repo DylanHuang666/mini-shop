@@ -39,14 +39,14 @@
           <!-- 播放量 -->
           <view class="play_count_wrap">
             <!-- 图标 -->
-            <text class="fa fa-play-circle-o"></text>
+            <text class="iconfont2 icon-shipin"></text>
             <!-- 数值 -->
             <text class="play_count">{{item.playCount}}</text>
           </view>
           <!-- 评论量 -->
           <view class="comment_count_row">
             <!-- 图标 -->
-            <text class="fa fa-commenting-o"></text>
+            <text class="iconfont2 icon-pinglun"></text>
             <!-- 数值 -->
             <text class="comment_count">{{item.commentCount}}</text>
         </view>

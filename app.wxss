@@ -1,5 +1,3 @@
-@import "./styles/iconfont.wxss";
-@import "./styles/fontawesome.wxss";
 @import "./styles/iconfont2.wxss";
 
 

@@ -2,6 +2,7 @@ import {
   request
 } from "../../request/index.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
+let { formatTime } = require('../../utils/util.js');
 Page({
 
   /**
@@ -73,8 +74,9 @@ Page({
       this.changeTitleByIndex(type - 1);
       // this.getOrders(type);
       let orderList = wx.getStorageSync("successOrder") || [];
+      console.log(orderList)
       let neworderList = orderList.map(v => ({ ...v,
-        create_time_cn: (new Date(v.createTime).toLocaleString())
+        create_time_cn: formatTime(new Date(v.createTime))
       }))
       let orders;
       if (type == 1 || type == 2) {
@@ -127,7 +129,7 @@ Page({
     let type = index + 1;
     let orderList = wx.getStorageSync("successOrder") || [];
     let neworderList = orderList.map(v => ({ ...v,
-      create_time_cn: (new Date(v.createTime).toLocaleString())
+      create_time_cn: formatTime(new Date(v.createTime))
     }))
     let orders;
     if (type == 1 || type == 2) {

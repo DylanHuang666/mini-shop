@@ -30,7 +30,7 @@ Page({
     let that = this;
     // 利用小程序内置发送请求的方法
     wx.request({
-      url: "https://easy-mock.com/mock/5c1dfd98e8bfa547414a5278/bili/navList",
+      url: "https://www.fastmock.site/mock/c8b94bc7b5f6687ccfe99d2c4132803f/bi/navList",
       success(res) {
         // console.log(res);
         if (res.data.code === 0) {
@@ -48,7 +48,7 @@ Page({
   getSwiperList() {
     let that = this;
     wx.request({
-      url: "https://easy-mock.com/mock/5c1dfd98e8bfa547414a5278/bili/swiperList",
+      url: "https://www.fastmock.site/mock/c8b94bc7b5f6687ccfe99d2c4132803f/bi/swiperList",
       success(res) {
         // console.log(res);
         if (res.data.code === 0) {

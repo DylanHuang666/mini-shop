@@ -26,7 +26,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('onLoad')
     const Cates = wx.getStorageSync("cates");
     // 2 判断
     if (!Cates) {
@@ -123,7 +122,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log(3)
     // this.data.view = this.options.view
   },
 

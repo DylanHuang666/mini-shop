@@ -1,45 +1,53 @@
-
-page{
+page {
   color: #666;
   padding: 10rpx;
 }
+
 /* 首页导航 */
-.nav_wrap{}
-.nav{
+
+.nav {
   white-space: nowrap;
   padding: 5rpx 0;
 }
-.nav_item{
+
+.nav_item {
   padding: 20rpx 45rpx;
   font-size: 30rpx;
   display: inline-block;
 }
-.nav_item.active{
+
+.nav_item.active {
   border-bottom: 5rpx solid #de688b;
 }
 
 /* 轮播图 */
-.slides{
-  /* margin-top: 10rpx; */
-}
-.slides swiper{
+
+/* .slides{
+  margin-top: 10rpx;
+} */
+
+.slides swiper {
   height: 220rpx;
 }
-.slides swiper swiper-item{
+
+.slides swiper swiper-item {
   border-radius: 16rpx;
 }
-.slides navigator{
+
+.slides navigator {
   width: 100%;
   height: 100%;
 }
-.slides image{
+
+.slides image {
   width: 100%;
   height: 100%;
   /* border-radius: 16rpx; */
 }
 
 /* 视频列表 */
-.video_wrap{
+
+.video_wrap {
   display: flex;
   flex-wrap: wrap;
   padding: 5rpx;
@@ -47,18 +55,21 @@ page{
   margin-top: 6rpx;
 }
 
-.video_item{
+.video_item {
   width: 48%;
   margin-bottom: 20rpx;
 }
-.video_img{
+
+.video_img {
   position: relative;
 }
-.video_img image{
+
+.video_img image {
   width: 100%;
   border-radius: 15rpx;
 }
-.video_img .video_info{
+
+.video_img .video_info {
   position: absolute;
   bottom: 16rpx;
   left: 0;
@@ -69,13 +80,17 @@ page{
   font-size: 24rpx;
 }
 
-.video_info .fa{
-  padding-right: 8rpx
+.video_info .iconfont2 {
+  padding-right: 8rpx;
 }
 
-.video_title{
-  font-size: 28rpx;
+.video_info > view {
+  display: flex;
+  align-items: center;
+}
 
+.video_title {
+  font-size: 28rpx;
   display: -webkit-box;
   overflow: hidden;
   white-space: normal;

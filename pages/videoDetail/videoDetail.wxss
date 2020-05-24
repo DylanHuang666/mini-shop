@@ -22,9 +22,9 @@
   padding: 8rpx 20rpx;
 }
 
-.video_title .fa{
+/* .video_title .fa{
   color: #888;
-}
+} */
 
 .video_detail {
   margin-top: 5rpx;

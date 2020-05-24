@@ -8,7 +8,7 @@
     <!-- 视频标题 -->
     <view class="video_title">
       <text>{{videoInfo.videoTitle}}</text>
-      <text class="fa fa-angle-down"></text>
+      <text class="iconfont2 icon-down"></text>
     </view>
     <!-- 视频作者。。 -->
     <view class="video_detail">

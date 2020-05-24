@@ -22,7 +22,7 @@
 <view class="goods-wrap">
   <view class="good-item" wx:for="{{orderinfo[0].detail}}" wx:key="goods_id">
     <view class="img-wrap">
-      <image mode="widthFix" src="{{item.goods_small_logo}}"></image>
+      <image mode="widthFix" src="{{item.goods_small_logo?item.goods_small_logo:'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}"></image>
     </view>
     <view class="good-info-box">
       <view class="good-name">{{item.goods_name}}</view>
